@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pokemon</string>
+    <string name="imgThumb">Image Thumb</string>
+    <string name="title">Title</string>
+    <string name="Imgdelete">IMGdelete</string>
+    <string name="imgCopy">Image Copy icon</string>
 </resources>
