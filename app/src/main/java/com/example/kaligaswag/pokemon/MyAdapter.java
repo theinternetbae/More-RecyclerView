@@ -37,6 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         PokemonModel current = objectList.get(position);
         holder.setData(current, position);
+        holder.setListeners();
 
     }
 
@@ -45,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return objectList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView title;
         private ImageView imgThumb, imgDelete, imgCopy;
@@ -65,6 +66,37 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             this.imgThumb.setImageResource(currentObject.getImageID());
             this.position = position;
             this.currentObject = currentObject;
+        }
+
+        public void setListeners() {
+            imgThumb.setOnClickListener(MyViewHolder.this);
+            imgCopy.setOnClickListener(MyViewHolder.this);
+            imgDelete.setOnClickListener(MyViewHolder.this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.img_delete:
+                    removeItem(position);
+                    break;
+
+                case R.id.img_copy:
+                    addItem(position, currentObject);
+                    break;
+            }
+        }
+
+        private void addItem(int position, PokemonModel currentObject) {
+            objectList.add(position, currentObject);
+            notifyItemInserted(position);
+            notifyItemChanged(position, objectList.size());
+        }
+
+        private void removeItem(int position) {
+            objectList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemChanged(position, objectList.size());
         }
     }
 }
