@@ -68,6 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             this.currentObject = currentObject;
         }
 
+        // set method
         public void setListeners() {
             imgThumb.setOnClickListener(MyViewHolder.this);
             imgCopy.setOnClickListener(MyViewHolder.this);
